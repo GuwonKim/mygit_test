@@ -20,13 +20,6 @@ jobs:
           if [ -z "${{ secrets.SERVER_SSH_KEY }}" ]; then echo "SERVER_SSH_KEY ❌"; else echo "SERVER_SSH_KEY ✅"; fi
 
       # 3️⃣ SSH 설정
-      - name: Debug SSH key
-        run: |
-          echo "==== SSH KEY HEADER ===="
-          head -n 2 ~/.ssh/id_rsa
-          echo "==== SSH KEY FOOTER ===="
-          tail -n 2 ~/.ssh/id_rsa
-    
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -34,6 +27,13 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Debug SSH key
+        run: |
+          echo "==== SSH KEY HEADER ===="
+          head -n 2 ~/.ssh/id_rsa
+          echo "==== SSH KEY FOOTER ===="
+          tail -n 2 ~/.ssh/id_rsa
+    
       # 4️⃣ nginx.conf 파일 존재 확인
       - name: Check nginx.conf exists
         run: |
