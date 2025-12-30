@@ -43,7 +43,7 @@ jobs:
       - name: Upload nginx.conf to server
         run: |
           scp nginx.conf \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/tmp/nginx.conf.test
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~/nginx.conf.test
 
       # 6️⃣ 서버에서 파일 확인
       - name: Verify nginx.conf on server
